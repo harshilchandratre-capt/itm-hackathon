@@ -10,8 +10,7 @@ import RootLayout from "./_root/RootLayout";
 function App() {
   return (
     <>
-      {" "}
-      ram ram
+
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
