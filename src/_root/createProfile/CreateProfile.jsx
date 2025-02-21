@@ -3,18 +3,21 @@ import { StateList } from "@/components/shared/StateList";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React, { useState } from "react";
+import { userContext } from "@/context/userContext";
+import { convertToPlainNumber } from "@/lib/utils";
+import { userServices } from "@/services/userServices";
+import React, { useContext, useState } from "react";
 
 const CreateProfile = () => {
-  const [stateCode, setStateCode] = useState(null);
+  const [stateCode, setStateCode] = useState("HR");
   const [stateName, SetstateName] = useState("");
-  const [cityName, setcityName] = useState(null);
-  const [name, setname] = useState("");
-
-  const [age, setAge] = useState("");
-
+  const [cityName, setcityName] = useState("Ambala");
+  const [name, setname] = useState("Armaan");
+  const [age, setAge] = useState("25");
   const [error, setError] = useState("");
   const [isLoding, setIsLoding] = useState(false);
+
+  const { user } = useContext(userContext);
 
   const handleSubmit = async () => {
     setIsLoding(true);
@@ -37,6 +40,17 @@ const CreateProfile = () => {
       setIsLoding(false);
       return;
     }
+
+    console.log(parseInt(user.phone));
+    const data = {
+      phone: convertToPlainNumber(user.phone),
+      state: stateName,
+      city: cityName,
+      name: name,
+      age: parseInt(age),
+    };
+
+    await userServices.addUserIntoDb({ data });
 
     setIsLoding(false);
   };

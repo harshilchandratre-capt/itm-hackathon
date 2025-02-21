@@ -1,4 +1,5 @@
-import { Client } from "appwrite";
+import { Client, Databases } from "appwrite";
+import { Database } from "lucide-react";
 
 export const appwriteConfig = {
   projectId: import.meta.env.VITE_APPWRITE_PROJECT_ID,
@@ -8,3 +9,5 @@ export const appwriteConfig = {
 export const client = new Client()
   .setEndpoint(appwriteConfig.endpoint)
   .setProject(appwriteConfig.projectId);
+
+export const databases = new Databases(client);

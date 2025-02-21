@@ -20,6 +20,7 @@ function App() {
       console.log("Fetching user...");
       if (user) {
         addUser(user);
+        console.log(user);
       }
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -32,7 +33,6 @@ function App() {
 
   return (
     <>
-
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />

@@ -2,8 +2,9 @@ import InputOtp from "@/components/shared/InputOtp";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { userContext } from "@/context/userContext";
 import authServices from "@/services/authServices";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 const AuthPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -11,6 +12,7 @@ const AuthPage = () => {
   const [userId, setUserId] = useState("");
   const [otpSent, setOtpSent] = useState(false);
 
+  const { addUser } = useContext(userContext);
   const sendOtp = async () => {
     const userId = await authServices.sendOTP({ phoneNumber });
     setOtpSent(true);
@@ -19,6 +21,8 @@ const AuthPage = () => {
 
   const handleOtp = async () => {
     await authServices.verifyOTP({ userId, otp });
+    const user = await authServices.getCurrentUser();
+    addUser(user);
   };
 
   return (
