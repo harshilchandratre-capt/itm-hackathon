@@ -32,6 +32,7 @@ function App() {
 
   return (
     <>
+
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
