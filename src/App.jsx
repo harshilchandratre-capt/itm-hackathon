@@ -10,6 +10,7 @@ import RootLayout from "./_root/RootLayout";
 function App() {
   return (
     <>
+
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
