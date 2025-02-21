@@ -5,13 +5,19 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./context/userContext";
 import { LoadingProvider } from "./context/loadingContext";
+import { ProductsProvider } from "./context/productsContext";
+import { OrdersProvider } from "./context/OrderContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <LoadingProvider>
         <UserProvider>
-          <App />
+          <ProductsProvider>
+            <OrdersProvider>
+              <App />
+            </OrdersProvider>
+          </ProductsProvider>
         </UserProvider>
       </LoadingProvider>
     </BrowserRouter>
