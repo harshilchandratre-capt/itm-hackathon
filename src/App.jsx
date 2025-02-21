@@ -1,22 +1,23 @@
-import { Route, Routes } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import authServices from "./services/authServices";
-import { userContext } from "./context/userContext";
-import ServicesPage from "./_root/servicesPage/ServicesPage";
-import ContactPage from "./_root/contact/ContactPage";
-import AboutPage from "./_root/about/AboutPage";
-import LandingPage from "./_root/landingPage/LandingPage";
-import LoginPage from "./_auth/loginPage/LoginPage";
+import { Route, Routes } from "react-router-dom";
 import AuthLayout from "./_auth/AuthLayout";
-import RootLayout from "./_root/RootLayout";
 import AuthPage from "./_auth/authPage/AuthPage";
-import CreateProfile from "./_root/createProfile/CreateProfile";
+import LoginPage from "./_auth/loginPage/LoginPage";
+import AboutPage from "./_root/about/AboutPage";
 import AddProduct from "./_root/addProduct/AddProduct";
 import AllProducts from "./_root/allProducts/AllProducts";
-import ProductPage from "./_root/productPage/ProductPage";
-import PlaceOrder from "./_root/placeOrder/PlaceOrder";
-import MyOrders from "./_root/myOrders/MyOrders";
+import ContactPage from "./_root/contact/ContactPage";
+import CreateProfile from "./_root/createProfile/CreateProfile";
+import HomePage from "./_root/homePage/LandingPage";
+import LandingPage from "./_root/landingPage/LandingPage";
 import ManageOrders from "./_root/manageOrders/ManageOrders";
+import MyOrders from "./_root/myOrders/MyOrders";
+import PlaceOrder from "./_root/placeOrder/PlaceOrder";
+import ProductPage from "./_root/productPage/ProductPage";
+import RootLayout from "./_root/RootLayout";
+import ServicesPage from "./_root/servicesPage/ServicesPage";
+import { userContext } from "./context/userContext";
+import authServices from "./services/authServices";
 
 const routes = (
   <>
@@ -27,7 +28,8 @@ const routes = (
       </Route>
 
       <Route element={<RootLayout />}>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/services" element={<ServicesPage />} />
