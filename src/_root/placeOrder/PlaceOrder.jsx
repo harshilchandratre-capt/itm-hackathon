@@ -4,6 +4,7 @@ import { orderServices } from "@/services/orderServices";
 import { productServices } from "@/services/productServices";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
   const { productId, quantity } = useParams();
@@ -11,6 +12,8 @@ const PlaceOrder = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useContext(userContext);
+
+  const navigate = useNavigate();
 
   const getProduct = async () => {
     try {
@@ -43,7 +46,7 @@ const PlaceOrder = () => {
 
     await orderServices.placeOrder({ order: data });
     console.log("placed");
-    console.log(data);
+    navigate('/all-products');
   };
 
   if (loading) {
@@ -101,7 +104,7 @@ const PlaceOrder = () => {
 
             <p className="text-sm text-gray-500">
               Status:{" "}
-              <span className="font-medium text-blue-600">
+              <span className="font-medium text-green-500">
                 {product.availabilityStatus}
               </span>
             </p>
@@ -116,7 +119,7 @@ const PlaceOrder = () => {
 
         <div className="mt-8">
           <Button
-            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300"
+            className="w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300"
             onClick={handlePlaceOrder}
           >
             Confirm Order

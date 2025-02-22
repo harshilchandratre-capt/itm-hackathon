@@ -1,10 +1,9 @@
 import InputOtp from "@/components/shared/InputOtp";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { userContext } from "@/context/userContext";
 import authServices from "@/services/authServices";
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const slogans = [
@@ -44,7 +43,7 @@ const AuthPage = () => {
       if (existingUser) {
         // ✅ User is already logged in, redirect to create-profile
         addUser(existingUser);
-        navigate("/create-profile");
+        navigate("/");
         return;
       }
 
@@ -53,7 +52,7 @@ const AuthPage = () => {
 
       const user = await authServices.getCurrentUser();
       addUser(user);
-      navigate("/create-profile");
+      navigate("/");
     } catch (error) {
       console.error("Error during authentication:", error);
     }
@@ -77,6 +76,7 @@ const AuthPage = () => {
               className="bg-lime-50"
               placeholder={"Enter phone number"}
               type="text"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               onChange={(e) => {
                 setPhoneNumber(e.target.value);
               }}

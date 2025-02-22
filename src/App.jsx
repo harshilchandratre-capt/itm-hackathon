@@ -18,10 +18,13 @@ import RootLayout from "./_root/RootLayout";
 import ServicesPage from "./_root/servicesPage/ServicesPage";
 import { userContext } from "./context/userContext";
 import authServices from "./services/authServices";
+import ProtectedRoute from "./_root/Protectedroutes";
+
 
 const routes = (
   <>
     <Routes>
+      {/* Public Routes */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth" element={<AuthPage />} />
@@ -34,15 +37,16 @@ const routes = (
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/create-profile" element={<CreateProfile />} />
-        <Route path="/add-product" element={<AddProduct />} />
-        <Route path="/all-products" element={<AllProducts />} />
-        <Route path="/my-orders" element={<MyOrders />} />
-        <Route path="/manage-orders" element={<ManageOrders />} />
-        <Route
-          path="/place-order/:productId/:quantity"
-          element={<PlaceOrder />}
-        />
         <Route path="/product/:id" element={<ProductPage />} />
+
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/all-products" element={<AllProducts />} />
+          <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/manage-orders" element={<ManageOrders />} />
+          <Route path="/place-order/:productId/:quantity" element={<PlaceOrder />} />
+        </Route>
       </Route>
     </Routes>
   </>
